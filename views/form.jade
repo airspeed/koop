@@ -1,11 +1,39 @@
 extends layout
 block head
+  script(src="//parsleyjs.org/dist/parsley.min.js")
+  script(src="//raw.githubusercontent.com/guillaumepotier/Parsley.js/master/src/i18n/de.js")
   script(type='text/javascript').
     $(document).ready(function() {
     });
+  link(rel='stylesheet', href='//parsleyjs.org/src/parsley.css', type='text/css')
 block content
   h1= title
-  p Welcome to #{title}
-  div
-    a(href='/done').
-      Weiter
+  form(data-parsley-validate, method="POST", action="/form")
+    label(for="name").
+      Vorname
+    input(type="text", name="name" required)
+    label(for="surname").
+      Name
+    input(type="text", name="surname" required)
+    label(for="company").
+      Firma
+    input(type="text", name="company")
+    label(for="street").
+      Stra&szlig;e u. Hausnummer
+    input(type="text", name="street" required)
+    label(for="zip_code").
+      PLZ
+    input(type="text", name="zip_code" required)
+    label(for="city").
+      Ort
+    input(type="text", name="city" required)
+    label(for="country").
+      Land
+    select(id="country", name="country", required)
+      option(value="DE").
+        Deutschland
+      option(value="AT").
+        &Ouml;sterreich
+      option(value="CH").
+        Schweiz
+    input(type="submit" value="Abschicken")

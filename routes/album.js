@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET album */
 router.get('/', function(req, res, next) {
-  res.render('album', { title: 'clixxie' });
+  res.render('album', { title: 'Fotobuch' });
 });
 
 module.exports = router;
