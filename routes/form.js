@@ -13,7 +13,7 @@ router.post('/', function(req, res, next) {
   		host: 'fotobuch-api-dev.clixxie.de',
   		path: '/api/countries.json?version=v1.1.5'
   	};
-  	callback = function( response )
+  	var callback = function( response )
   	{
   		console.log( response.statusCode );
   		response.setEncoding( 'utf8' );
