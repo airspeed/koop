@@ -73,7 +73,7 @@ function getAccessToken( email )
 	  		});
 
 	  		response.on( 'error', function( e ){
-	  			console.log( e.message );
+	  			console.log( '@getAccessToken :: ' + e.message );
 	  			reject( e );
 	  		});
 	  	};
@@ -128,7 +128,7 @@ function saveAddress( access_token, address )
 	  		});
 
 	  		response.on( 'error', function( e ){
-	  			console.log( e.message );
+	  			console.log( '@saveAddress :: ' + e.message );
 	  			reject( e );
 	  		});
 	  	};
@@ -190,7 +190,7 @@ function saveOrder( access_token, address_id, album_id, payment_type_id )
 	  		});
 
 	  		response.on( 'error', function( e ){
-	  			console.log( e.message );
+	  			console.log( '@saveOrder :: ' + e.message );
 	  			reject( e );
 	  		});
 	  	};
@@ -205,7 +205,7 @@ function uploadPDFFile( access_token, album_id, pdf_path )
 	return new Promise( function( resolve, reject ) {
 	  	var callback = function( response )
 	  	{
-	  		console.log( response.statusCode );
+	  		// console.log( response.statusCode );
 	  		response.setEncoding( 'utf8' );
 	  		var json = "";
 
@@ -240,7 +240,6 @@ function uploadPDFFile( access_token, album_id, pdf_path )
 	  	};
 	  	var token_req = https.request( options, callback );
 	  	form.pipe( token_req );
-	  	// token_req.end();
 	});
 }
 
