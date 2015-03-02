@@ -9,6 +9,9 @@ block head
 block content
   h1= title
   form(data-parsley-validate, method="POST", action="/form")
+    label(for="email").
+      E-Mail
+    input(type="email", name="email" required)
     label(for="name").
       Vorname
     input(type="text", name="name" required)
@@ -27,13 +30,22 @@ block content
     label(for="city").
       Ort
     input(type="text", name="city" required)
-    label(for="country").
+    label(for="country_code").
       Land
-    select(id="country", name="country", required)
+    select(id="country_code", name="country_code", required)
       option(value="DE").
         Deutschland
       option(value="AT").
         &Ouml;sterreich
       option(value="CH").
         Schweiz
+    label(for="payment_type_id").
+      Zahlungsart
+    p
+      span.
+        PayPal
+      input(type="radio", name="payment_type_id", id="payment_type_paypal", value="4" required checked)
+      span.
+        Invoice
+      input(type="radio", name="payment_type_id", id="payment_type_invoice", value="1")    
     input(type="submit" value="Abschicken")
