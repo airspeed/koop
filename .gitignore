@@ -30,3 +30,4 @@ node_modules
 # PDF
 public/*.pdf
 public/.DS_Store
+.DS_Store

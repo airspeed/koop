@@ -7,10 +7,12 @@ var FormData = require('form-data');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 var CLIENT_ID = 'cef23f7912af4b3a6629ff342f155d239';
 var CLIENT_SECRET = '904efb802e1c5bed30976b50b09e76a0';
-var ALBUM_ID = 49474;// fotobuch that can be ordered with this app.
-var PDF_PATH = 'public/' + ALBUM_ID + '.pdf';// fotobuch that can be ordered with this app.
+// var PDF_PATH = 'public/redbull.pdf';// fotobuch that can be ordered with this app.
+var PDF_PATH = 'public/B28997-30304-print.pdf';// fotobuch that can be ordered with this app.
 var API_VERSION = 'v1.1.5';
 var REQUEST_LOCALE = 'de_DE';
+var API_HOST = 'fotobuch-api.clixxie.de';
+var PRODUCT_ID = 7 // == 'CLXB5S2Q';
 
 /* GET album */
 router.get('/', function(req, res, next) {
@@ -18,17 +20,23 @@ router.get('/', function(req, res, next) {
 });
 router.post('/', function(req, res, next) {
 	var access_token = '';
+	var album_id = 0;
 	getAccessToken( req.body.email )
 	// create album for user? ask Slawek
+	// getAccessTokenForDummyUser() // scheint nicht zu funktionieren, Slawek?
 	.then( function ( access_token_json ){
 		access_token = access_token_json.access_token;
+		return saveAlbum( access_token );
+	}, errorCallback )
+	.then( function ( album_json ){
+		album_id = album_json.result.id;
 		return saveAddress( access_token, req.body );
 	}, errorCallback )
 	.then( function ( address_json ){
-		return saveOrder( access_token, address_json.result.id, ALBUM_ID, req.body.payment_type_id );
+		return saveOrder( access_token, address_json.result.id, album_id, req.body.payment_type_id, req.body.quantity );
 	}, errorCallback )
 	.then( function ( order_json ){
-		return uploadPDFFile( access_token, ALBUM_ID, PDF_PATH );
+		return uploadPDFFile( access_token, album_id, PDF_PATH );
 	}, errorCallback )
 	.then( function( json ) {
 		res.end();
@@ -48,7 +56,7 @@ function getAccessToken( email )
 	  		locale: REQUEST_LOCALE
 	  	});
 	  	var options = {
-	  		host: 'fotobuch-api.clixxie.de',
+	  		host: API_HOST,
 	  		path: '/api/oauth2/token.json',
 	  		method: 'POST',
 	  		headers: {
@@ -83,6 +91,106 @@ function getAccessToken( email )
 	  });
 }
 
+function getAccessTokenForDummyUser()
+{
+	return new Promise( function( resolve, reject ) {
+	  	var postData = JSON.stringify({
+	  		client_id: CLIENT_ID,
+	  		client_secret: CLIENT_SECRET,
+	  		locale: REQUEST_LOCALE,
+	  		user: {
+	  			dummy: true,
+	  			lang: REQUEST_LOCALE
+	  		}
+	  	});
+	  	var options = {
+	  		host: API_HOST,
+	  		path: '/api/users.json',
+	  		method: 'POST',
+	  		headers: {
+	  			'Content-Type': 'application/json',
+	  			'Content-Length': Buffer.byteLength( postData )
+	  		}
+	  	};
+	  	var callback = function( response )
+	  	{
+	  		// console.log( response.statusCode );
+	  		response.setEncoding( 'utf8' );
+	  		var json = "";
+
+	  		response.on( 'data', function( data ){
+	  			json += data;
+	  		});
+
+	  		response.on( 'end', function(){
+	  	    	json = JSON.parse( json );
+	  	    	// console.log( json );
+	  	    	resolve( json );
+	  		});
+
+	  		response.on( 'error', function( e ){
+	  			console.log( '@getAccessToken :: ' + e.message );
+	  			reject( e );
+	  		});
+	  	};
+	  	var token_req = https.request( options, callback );
+	  	token_req.write( postData );
+	  	token_req.end();
+	  });
+}
+
+function saveAlbum( access_token )
+{
+	return new Promise( function( resolve, reject ) {
+	  	var postData = JSON.stringify({
+	  		client_id: CLIENT_ID,
+	  		client_secret: CLIENT_SECRET,
+	  		version: API_VERSION,
+	  		access_token: access_token,
+	  		locale: REQUEST_LOCALE,
+	  		album: {
+	  			product_id: PRODUCT_ID,
+	  			title: '',
+	  			description: '',
+	  			client_uuid: 1
+	  		}
+	  	});
+	  	var options = {
+	  		host: API_HOST,
+	  		path: '/api/albums.json?access_token=' + access_token,
+	  		method: 'POST',
+	  		headers: {
+	  			'Content-Type': 'application/json',
+	  			'Content-Length': Buffer.byteLength( postData )
+	  		}
+	  	};
+	  	var callback = function( response )
+	  	{
+	  		// console.log( response.statusCode );
+	  		response.setEncoding( 'utf8' );
+	  		var json = "";
+
+	  		response.on( 'data', function( data ){
+	  			json += data;
+	  		});
+
+	  		response.on( 'end', function(){
+	  	    	json = JSON.parse( json );
+	  	    	// console.log( json );
+	  	    	resolve( json );
+	  		});
+
+	  		response.on( 'error', function( e ){
+	  			console.log( '@saveAddress :: ' + e.message );
+	  			reject( e );
+	  		});
+	  	};
+	  	var token_req = https.request( options, callback );
+	  	token_req.write( postData );
+	  	token_req.end();
+	  });
+}
+
 function saveAddress( access_token, address )
 {
 	return new Promise( function( resolve, reject ) {
@@ -103,7 +211,7 @@ function saveAddress( access_token, address )
 	  		}
 	  	});
 	  	var options = {
-	  		host: 'fotobuch-api.clixxie.de',
+	  		host: API_HOST,
 	  		path: '/api/addresses.json?access_token=' + access_token,
 	  		method: 'POST',
 	  		headers: {
@@ -138,7 +246,7 @@ function saveAddress( access_token, address )
 	  });
 }
 
-function saveOrder( access_token, address_id, album_id, payment_type_id )
+function saveOrder( access_token, address_id, album_id, payment_type_id, quantity )
 {
 	return new Promise( function( resolve, reject ) {
 	  	var postData = JSON.stringify({
@@ -159,13 +267,13 @@ function saveOrder( access_token, address_id, album_id, payment_type_id )
 	  				{
 	  					album_id: album_id,
 	  					address_id: address_id,
-	  					quantity: 1
+	  					quantity: quantity
 	  				}
 	  			]
 	  		}
 	  	});
 	  	var options = {
-	  		host: 'fotobuch-api.clixxie.de',
+	  		host: API_HOST,
 	  		path: '/api/orders.json?access_token=' + access_token,
 	  		method: 'POST',
 	  		headers: {
@@ -231,9 +339,9 @@ function uploadPDFFile( access_token, album_id, pdf_path )
 	  	form.append( 'access_token', access_token );
 	  	form.append( 'locale', REQUEST_LOCALE );
 	  	form.append( 'pdf', fs.createReadStream( pdf_path ) );
-	  	console.log( form );
+	  	form.append( 'album[content_type]', 'pdf' );
 	  	var options = {
-	  		host: 'fotobuch-api.clixxie.de',
+	  		host: API_HOST,
 	  		path: '/api/albums/' + album_id + '.json?upload=true&access_token=' + access_token,
 	  		method: 'PUT',
 	  		headers: form.getHeaders()
