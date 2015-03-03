@@ -2,6 +2,13 @@
   "name": "koop",
   "version": "0.0.1",
   "private": true,
+  "description": "Kooperation-App für clixxie",
+  "keywords": [
+    "kooperation",
+    "clixxie  "
+  ],
+  "author": "francesco.puglisi@femory.de",
+  "license": "MIT",
   "scripts": {
     "start": "node ./bin/www"
   },
