@@ -21,11 +21,11 @@ router.post('/', function(req, res, next) {
 	var access_token = '';
 	var album_id = 0;
 	var order_id = 0;
-	getAccessToken( req.body.email )
-	// create album for user? ask Slawek
-	// getAccessTokenForDummyUser() // scheint nicht zu funktionieren, Slawek?
+	// getAccessToken( req.body.email )
+	getAccessTokenForDummyUser() // scheint nicht zu funktionieren, Slawek?
 	.then( function ( access_token_json ){
-		access_token = access_token_json.access_token;
+		// access_token = access_token_json.access_token;
+		access_token = access_token_json.result.access_token;
 		return saveAlbum( access_token );
 	}, errorCallback )
 	.then( function ( album_json ){
@@ -105,6 +105,7 @@ function getAccessTokenForDummyUser()
 	  		client_id: CLIENT_ID,
 	  		client_secret: CLIENT_SECRET,
 	  		locale: REQUEST_LOCALE,
+	  		version: API_VERSION,
 	  		user: {
 	  			dummy: true,
 	  			lang: REQUEST_LOCALE
@@ -136,7 +137,7 @@ function getAccessTokenForDummyUser()
 	  		});
 
 	  		response.on( 'error', function( e ){
-	  			console.log( '@getAccessToken :: ' + e.message );
+	  			console.log( '@getAccessTokenForDummyUser :: ' + e.message );
 	  			reject( e );
 	  		});
 	  	};
