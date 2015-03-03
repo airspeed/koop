@@ -28,6 +28,6 @@ node_modules
 .lock-wscript
 
 # PDF
-public/*.pdf
+# public/*.pdf
 public/.DS_Store
 .DS_Store
