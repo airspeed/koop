@@ -7,20 +7,20 @@ var FormData = require('form-data');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 var CLIENT_ID = 'cef23f7912af4b3a6629ff342f155d239';
 var CLIENT_SECRET = '904efb802e1c5bed30976b50b09e76a0';
-// var PDF_PATH = 'public/redbull.pdf';// fotobuch that can be ordered with this app.
-var PDF_PATH = 'public/B28997-30304-print.pdf';// fotobuch that can be ordered with this app.
+var PDF_PATH = 'public/redbull.pdf';// fotobuch that can be ordered with this app.
 var API_VERSION = 'v1.1.5';
 var REQUEST_LOCALE = 'de_DE';
 var API_HOST = 'fotobuch-api.clixxie.de';
-var PRODUCT_ID = 7 // == 'CLXB5S2Q';
+var PRODUCT_CODE = 'CLXB5S2Q';
 
 /* GET album */
-router.get('/', function(req, res, next) {
-  	res.render('form', { title: 'Lieferadresse' });
+router.get( '/', function( req, res, next ) {
+  	res.render( 'form', { title: 'Lieferadresse' } );
 });
 router.post('/', function(req, res, next) {
 	var access_token = '';
 	var album_id = 0;
+	var order_id = 0;
 	getAccessToken( req.body.email )
 	// create album for user? ask Slawek
 	// getAccessTokenForDummyUser() // scheint nicht zu funktionieren, Slawek?
@@ -36,11 +36,18 @@ router.post('/', function(req, res, next) {
 		return saveOrder( access_token, address_json.result.id, album_id, req.body.payment_type_id, req.body.quantity );
 	}, errorCallback )
 	.then( function ( order_json ){
+		order_id = order_json.result.id;
 		return uploadPDFFile( access_token, album_id, PDF_PATH );
 	}, errorCallback )
+	.then( function ( upload_json ){
+		return commitOrder( access_token, order_id );
+	}, errorCallback )
 	.then( function( json ) {
-		res.end();
+		next();
 	}, errorCallback );
+});
+router.post( '/', function(req, res, next ) {
+	res.redirect( '/overview' );
 });
 
 function getAccessToken( email )
@@ -149,10 +156,11 @@ function saveAlbum( access_token )
 	  		access_token: access_token,
 	  		locale: REQUEST_LOCALE,
 	  		album: {
-	  			product_id: PRODUCT_ID,
-	  			title: '',
-	  			description: '',
-	  			client_uuid: 1
+	  			title: 'Red Bull',
+	  			description: 'Verleiht dir Flügel ... ',
+	  			'client-uuid': 'KoopRedBull' + (+new Date()).toString(),
+	  			format: PRODUCT_CODE,
+	  			content_type: 'pdf'
 	  		}
 	  	});
 	  	var options = {
@@ -339,7 +347,6 @@ function uploadPDFFile( access_token, album_id, pdf_path )
 	  	form.append( 'access_token', access_token );
 	  	form.append( 'locale', REQUEST_LOCALE );
 	  	form.append( 'pdf', fs.createReadStream( pdf_path ) );
-	  	form.append( 'album[content_type]', 'pdf' );
 	  	var options = {
 	  		host: API_HOST,
 	  		path: '/api/albums/' + album_id + '.json?upload=true&access_token=' + access_token,
@@ -349,6 +356,53 @@ function uploadPDFFile( access_token, album_id, pdf_path )
 	  	var token_req = https.request( options, callback );
 	  	form.pipe( token_req );
 	});
+}
+
+function commitOrder( access_token, order_id )
+{
+	return new Promise( function( resolve, reject ) {
+	  	var postData = JSON.stringify({
+	  		client_id: CLIENT_ID,
+	  		client_secret: CLIENT_SECRET,
+	  		version: API_VERSION,
+	  		access_token: access_token,
+	  		locale: REQUEST_LOCALE,
+	  		payment_info: {}
+	  	});
+	  	var options = {
+	  		host: API_HOST,
+	  		path: '/api/orders/' + order_id + '/proceed.json?access_token=' + access_token,
+	  		method: 'PUT',
+	  		headers: {
+	  			'Content-Type': 'application/json',
+	  			'Content-Length': Buffer.byteLength( postData )
+	  		}
+	  	};
+	  	var callback = function( response )
+	  	{
+	  		// console.log( response.statusCode );
+	  		response.setEncoding( 'utf8' );
+	  		var json = "";
+
+	  		response.on( 'data', function( data ){
+	  			json += data;
+	  		});
+
+	  		response.on( 'end', function(){
+	  	    	json = JSON.parse( json );
+	  	    	// console.log( json );
+	  	    	resolve( json );
+	  		});
+
+	  		response.on( 'error', function( e ){
+	  			console.log( '@commitOrder :: ' + e.message );
+	  			reject( e );
+	  		});
+	  	};
+	  	var token_req = https.request( options, callback );
+	  	token_req.write( postData );
+	  	token_req.end();
+	  });
 }
 
 var errorCallback = function( e )
