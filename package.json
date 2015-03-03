@@ -1,6 +1,6 @@
 {
   "name": "koop",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -18,5 +18,9 @@
     "promise": "^6.1.0",
     "querystring": "^0.2.0",
     "serve-favicon": "~2.2.0"
+  },
+  "engines": {
+    "node": "0.12.0",
+    "npm": "2.5.1"
   }
 }
