@@ -5,12 +5,12 @@ var Promise = require('promise');
 var fs = require('fs');
 var FormData = require('form-data');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-var CLIENT_ID = 'cef23f7912af4b3a6629ff342f155d239';
-var CLIENT_SECRET = '904efb802e1c5bed30976b50b09e76a0';
+var CLIENT_ID = 'cef23f7912af4b3a6629ff342f121233';
+var CLIENT_SECRET = '904efb802e1c5bed30976b50b067875878';
 var PDF_PATH = 'public/redbull.pdf';// fotobuch that can be ordered with this app.
 var API_VERSION = 'v1.1.5';
 var REQUEST_LOCALE = 'de_DE';
-var API_HOST = 'fotobuch-api.clixxie.de';
+var API_HOST = 'fotobuch-api-dev.clixxie.de';
 var PRODUCT_CODE = 'CLXB5S2Q';
 
 /* GET album */
@@ -216,7 +216,8 @@ function saveAddress( access_token, address )
 	  			city: address.city,
 	  			zip_code: address.zip_code,
 	  			country_code: address.country_code,
-	  			company: address.company
+	  			company: address.company,
+	  			email: address.email
 	  		}
 	  	});
 	  	var options = {
