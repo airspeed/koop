@@ -2,6 +2,10 @@ extends layout
 
 block content
   h1= title
+  div= order.id
   div
     a(href='/form').
-      Zur&uuml;ck ( dev only )
+      Zur&uuml;ck
+  div
+    a(href=kaufen_link).
+      Kaufen

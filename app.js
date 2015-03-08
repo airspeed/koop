@@ -13,6 +13,20 @@ var done = require('./routes/done');
 
 var app = express();
 
+/*
+ * ==========================
+ * Constants
+ * ==========================
+ */
+CLIENT_ID = 'cef23f7912af4b3a6629ff342f121233';
+CLIENT_SECRET = '904efb802e1c5bed30976b50b067875878';
+PDF_PATH = 'public/redbull.pdf';// fotobuch that can be ordered with this app.
+API_VERSION = 'v1.1.5';
+REQUEST_LOCALE = 'de_DE';
+API_HOST = 'fotobuch-api-dev.clixxie.de';
+PRODUCT_CODE = 'CLXB5S2Q';
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
