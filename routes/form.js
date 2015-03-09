@@ -178,7 +178,7 @@ function saveAlbum( access_token )
 	  		});
 
 	  		response.on( 'error', function( e ){
-	  			console.log( '@saveAddress :: ' + e.message );
+	  			console.log( '@saveAlbum :: ' + e.message );
 	  			reject( e );
 	  		});
 	  	};
@@ -202,6 +202,7 @@ function saveAddress( access_token, address )
 	  			surname: address.surname,
 	  			street: address.street,
 	  			city: address.city,
+	  			district: address.district,
 	  			zip_code: address.zip_code,
 	  			country_code: address.country_code,
 	  			company: address.company,

@@ -17,59 +17,78 @@ block content
         hr
         h1= title
       form(data-parsley-validate, method="POST", action="/form")
+        div
             label(for="email") E-Mail
             input(type="email", name="email" required)
+        div
             label(for="name") Vorname
             input(type="text", name="name" required)
+        div
             label(for="surname") Name
             input(type="text", name="surname" required)
+        div
             label(for="company") Firma
             input(type="text", name="company")
+        div
             label(for="street") Stra&szlig;e u. Hausnummer
             input(type="text", name="street" required)
-            label(for="zip_code")
-              PLZ
+        div
+            label(for="district") Grafschaft
+            input(type="text", name="district")
+        div
+            label(for="zip_code") PLZ
             input(type="text", name="zip_code" required)
-            label(for="city").
-              Ort
+        div
+            label(for="city") Ort
             input(type="text", name="city" required)
-            label(for="country_code").
-              Land
+        div
+            label(for="country_code") Land
             select(id="country_code", name="country_code", required)
-              option(value="DE").
-                Deutschland
-              option(value="AT").
-                &Ouml;sterreich
-              option(value="CH").
-                Schweiz
-              option(value="FR").
-                Frankreich
-              option(value="IT").
-                Italien
-              option(value="NL").
-                Niederlande
-              option(value="BE").
-                Belgien
-              option(value="NO").
-                Norwegen
-              option(value="FI").
-                Finnland
-              option(value="SE").
-                Schweden
-              option(value="DK").
-                D&auml;nemark
-              option(value="GB").
-                Vereinigtes K&ouml;nigreich
-            label(for="payment_type_id").
-              Zahlungsart
-            p
-              span - PayPal
+              option(value="DE") Deutschland
+              option(value="AT") &Ouml;sterreich
+              option(value="CH") Schweiz
+              option(value="FR") Frankreich
+              option(value="IT") Italien
+              option(value="NL") Niederlande
+              option(value="BE") Belgien
+              option(value="NO") Norwegen
+              option(value="FI") Finnland
+              option(value="SE") Schweden
+              option(value="DK") D&auml;nemark
+              option(value="GB") Vereinigtes K&ouml;nigreich
+              option(value="IE") Irland
+              option(value="LU") Luxemburg
+              option(value="CZ") Tschechien
+              option(value="PL") Polen
+              option(value="HU") Ungarn
+              option(value="ES") Spanien
+              option(value="PT") Portugal
+              option(value="SK") Slowakei
+              option(value="SI") Slowenien
+              option(value="HR") Kroatien
+        hr
+        div
+            u Zahlungsart
+            div
+              label(for="payment_type_paypal") PayPal
               input(type="radio", name="payment_type_id", id="payment_type_paypal", value="2" required checked)
-              br
-              span - Invoice
+            div
+              label(for="payment_type_invoice") Invoice
               input(type="radio", name="payment_type_id", id="payment_type_invoice", value="1")    
+        hr
+        div
             label(for="quantity") Menge
             input(name="quantity", type="number", min="1", max="10" required)
+        div
             label(for="voucher_code") Gutschein-Code
             input(name="voucher_code", type="text")
+        hr
+        div
+            input(name="agb", type="checkbox" required)
+            label(for="agb") Ja, ich stimme den 
+              a(href="http://bit.ly/1Hpgwy3" target="_blank") AGB
+              &nbsp; und den 
+              a(href="http://bit.ly/1HphHgN" target="_blank") Datenschutzbestimmungen
+              &nbsp; zu.
+        div
             input(type="submit" value="Abschicken")
