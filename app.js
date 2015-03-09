@@ -25,7 +25,7 @@ API_VERSION = 'v1.1.5';
 REQUEST_LOCALE = 'de_DE';
 API_HOST = 'fotobuch-api-dev.clixxie.de';
 PRODUCT_CODE = 'CLXB5S2Q';
-
+PAYMENT_TYPE_ID_PAYPAL = 2;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
