@@ -3,6 +3,7 @@ extends layout
 block head
   link(rel='stylesheet', href='stylesheets/bestellen.css')
 block content
+  - function formatCurrency( number ) { number = number.toString().replace('.', ','); if ( number.split(',').length < 2 ) { number += ',00'; } while( number.split(',')[1].length < 2 ) { number += '0'; } return number + ' €'; }
   div(class="main")
     div(class="form overview")
       div
@@ -42,41 +43,29 @@ block content
           span &nbsp;
           span x Squarebuch 30 Fotos a
           span &nbsp;
-          span= order.order_items[0].amount_eu
-          span &nbsp;
-          span &euro;
+          span= formatCurrency( order.order_items[0].amount_eu )
         div
           b Versandkosten: 
           br
-          span= order.order_items[0].shipping_cost_eu
-          span &nbsp;
-          span &euro;
+          span= formatCurrency( order.order_items[0].shipping_cost_eu )
         div
           b Zwischensumme: 
           br
           - var zs = +order.amount_eu + +order.order_items[0].shipping_cost_eu
-          span= zs
-          span &nbsp;
-          span &euro;
+          span= formatCurrency( zs )
         div
           b Rabatt: 
           br
-          span= order.discount_amount
-          span &nbsp;
-          span &euro;
+          span= formatCurrency( order.discount_amount )
         if +order.payment_type_commission > 0
           div
             b Zuschlag Rechnung: 
             br
-            span= order.payment_type_commission
-            span &nbsp;
-            span &euro;
+            span= formatCurrency( order.payment_type_commission )
         div
           b Endbetrag: 
           br
-          span= order.total_price
-          span &nbsp;
-          span &euro;
+          span= formatCurrency( order.total_price )
         hr
         div
           b Zahlungsart: 
