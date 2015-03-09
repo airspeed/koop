@@ -2,8 +2,6 @@ var express = require('express');
 var router = express.Router();
 var https = require('https');
 var Promise = require('promise');
-var fs = require('fs');
-var FormData = require('form-data');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 /* GET album */
@@ -29,13 +27,6 @@ router.post('/', function(req, res, next) {
 	.then( function ( address_json ){
 		return saveOrder( access_token, address_json.result.id, album_id, req.body.payment_type_id, req.body.quantity );
 	}, errorCallback )
-	// .then( function ( order_json ){
-	// 	order_id = order_json.result.id;
-	// 	return uploadPDFFile( access_token, album_id, PDF_PATH );
-	// }, errorCallback )
-	// .then( function ( upload_json ){
-	// 	return commitOrder( access_token, order_id );
-	// }, errorCallback )
 	.then( function( order_json ) {
 		order_id = order_json.result.id;
 		return saveVoucher( access_token, order_id, req.body.voucher_code );

@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var https = require('https');
 var Promise = require('promise');
-var fs = require('fs');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 /* GET album */
@@ -17,7 +16,6 @@ router.get( '/', function( req, res, next ) {
 		return authorizePayPalPayment( access_token, order_id, kaufen_link, '/form', order.payment_type_id );
 	}, errorCallback )
 	.then( function ( paypal_json ){
-			console.log( paypal_json );
 		if ( paypal_json && paypal_json.result && paypal_json.result.paypal_url )
 		{
 			kaufen_link = paypal_json.result.paypal_url;
@@ -62,7 +60,7 @@ function getOrder( access_token, order_id )
 	  		});
 
 	  		response.on( 'error', function( e ){
-	  			console.log( '@saveOrder :: ' + e.message );
+	  			console.log( '@getOrder :: ' + e.message );
 	  			reject( e );
 	  		});
 	  	};
@@ -111,7 +109,7 @@ function authorizePayPalPayment( access_token, order_id, redirect_success, redir
 	  		});
 
 	  		response.on( 'error', function( e ){
-	  			console.log( '@saveOrder :: ' + e.message );
+	  			console.log( '@authorizePayPalPayment :: ' + e.message );
 	  			reject( e );
 	  		});
 	  	};

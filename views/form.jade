@@ -50,7 +50,7 @@ block content
       input(type="radio", name="payment_type_id", id="payment_type_invoice", value="1")    
     label(for="quantity").
       Menge
-    input(name="quantity", type="number" required)
+    input(name="quantity", type="number", min="1", max="10" required)
     label(for="voucher_code").
       Gutschein-Code
     input(name="voucher_code", type="text")
