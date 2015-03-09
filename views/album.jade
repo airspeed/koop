@@ -3,21 +3,122 @@ block head
   script(src='//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js')
   script(src='booklet/jquery.easing.1.3.js')
   script(src='booklet/jquery.booklet.latest.min.js')
+  link(rel='stylesheet', href='//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/ui-lightness/jquery-ui.css', type='text/css')
+  link(rel='stylesheet', href='booklet/jquery.booklet.latest.css', type='text/css')
+  link(rel='stylesheet', href='stylesheets/booklet.css')
   script(type='text/javascript').
     $(document).ready(function() {
-      $('#fotobuch').booklet({ width: 1000, height: 500 });
+      $('#fotobuch').booklet({
+        width: 1000,
+        height: 500,
+        closed: true,
+        pageNumbers: false,
+        pagePadding: 40
+      });
     });
-  link(rel='stylesheet', href='booklet/jquery.booklet.latest.css', type='text/css')
 block content
-  h1= title
-  p Welcome to #{title}
-  #fotobuch
-    div
-      img(src='https://ununsplash.imgix.net/photo-1421284621639-884f4129b61d?q=75&fm=jpg&s=9f9c4eb194b84f49e6c6aa624de61ba2')
-    div
-      img(src='https://ununsplash.imgix.net/photo-1420708392410-3c593b80d416?q=75&fm=jpg&s=db450320d7ee6de66c24c9b0bf2de3c6')
-    div
-      img(src='https://unsplash.imgix.net/photo-1414490929659-9a12b7e31907?q=75&fm=jpg&s=f838066e7aa9eab9d1ccc28fd5ec9574')
-  div
-    a(href='/form').
-      Weiter
+  #footer(class="footer")
+    div(class="footerwidth center dyn_width")
+      div(class="fltlft c33l footer_seperator")
+        b Beste Qualit&auml;t
+        br
+        span 15x15 cm Fotobuch als
+        br
+        span hochwertiger Digitaldruck
+      div(class="fltlft c33l footer_seperator")
+        b Schnell geliefert
+        br
+        span In 5-7 Werktagen im
+        br
+        span Briefkasten 
+      div(class="fltlft c33l")
+        b Eigenes clixxie-fotobuch erstellen
+        br
+        a(href="http://goo.gl/qekQa")
+          img(src="images/app_store_de.png", width="94", height="33")
+        a(href="http://goo.gl/8celQ")
+          img(src="images/googleplay.png", width="94", height="33")
+  div(class="main")
+    div(class="header")
+      div(class="fltlft")
+        img(src="images/clixxie_logo.png")
+      div(class="fltrt")
+        div(class="orderbook_info orderbook_info_titel")
+        div(class="order_btn_field")
+          a(href="/form")
+            #ORDER(class="btn_orange")
+              div(class="btn_text") Bestellen
+          div(class="sbook_shadow")
+            img#SMALL_PREVIEW(class="sbook_img", src="images/fotobuch/Cover.jpg")
+          div(class="orderbook_info")
+            span 15x15 cm
+            br
+            span 30 Seiten
+            br
+            span 10,00 Euro
+    #fotobuch
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Cover.jpg')
+      div(class="page")
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild1.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild2.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild3.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild4.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild5.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild6.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild7.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild8.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild9.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild10.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild11.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild12.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild13.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild14.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild15.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild16.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild17.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild18.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild19.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild20.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild21.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild22.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild23.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild24.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild25.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild26.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild27.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild28.jpg')
+      div(class="page")
+        img(class="bild", src='images/fotobuch/Bild29.jpg')
+      div(class="page")
+      div(class="page")
+      div(class="page")
+        img(class="bild", src='images/backCover390.png')

@@ -10,7 +10,8 @@
   "author": "francesco.puglisi@femory.de",
   "license": "MIT",
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "postinstall": "bower install"
   },
   "dependencies": {
     "body-parser": "~1.10.2",
@@ -24,7 +25,8 @@
     "npm": "^2.6.1",
     "promise": "^6.1.0",
     "querystring": "^0.2.0",
-    "serve-favicon": "~2.2.0"
+    "serve-favicon": "~2.2.0",
+    "bower": "~1.3.12"
   },
   "engines": {
     "node": "0.12.0",

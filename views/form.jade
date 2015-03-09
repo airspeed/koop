@@ -1,11 +1,11 @@
 extends layout
 block head
-  script(src="//raw.githubusercontent.com/guillaumepotier/Parsley.js/master/dist/parsley.min.js")
-  script(src="//raw.githubusercontent.com/guillaumepotier/Parsley.js/master/src/i18n/de.js")
+  script(src="/libs/parsleyjs/dist/parsley.min.js", type="text/javascript")
+  script(src="/libs/parsleyjs/src/i18n/de.js", type="text/javascript")
   script(type='text/javascript').
     $(document).ready(function() {
     });
-  link(rel='stylesheet', href='//raw.githubusercontent.com/guillaumepotier/Parsley.js/master/src/parsley.css', type='text/css')
+  link(rel='stylesheet', href='/libs/parsleyjs/src/parsley.css', type='text/css')
 block content
   h1= title
   form(data-parsley-validate, method="POST", action="/form")

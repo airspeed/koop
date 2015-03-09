@@ -1,0 +1,200 @@
+.dyn_width {
+	width: 738px;
+}
+.dyn_height {
+	height: 369px;
+}
+
+body {
+	font-family: Arial, Helvetica, "Helvetica Neue";
+	line-height: 1.33;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+	background-color: #e0e0e0;
+	color: #181818;
+}
+.main {
+	z-index: 1;
+	position: relative;
+	position: static;
+	padding: 20px;
+	margin: 0px auto;
+	width: 1000px;
+}
+.main_padding {
+	padding-top: 40px;
+	margin: 0 auto;
+}
+.header {
+	height: 104px;
+}
+.arrow_top { padding-top: 28px; padding-right: 20px;}
+.order_btn_field {
+	background:#fff;
+	width: 350px;
+	height: 72px;
+	position: relative;
+	top: 20px;
+}
+.footer {
+	text-align:center;
+	color: #ffffff;
+	position: fixed;
+	z-index: 0;
+	bottom: 0;
+	padding: 10px;
+	margin: 0;
+	background: #404040;
+	width: 100%;
+	height: 88px;
+	font-size: 14px;
+}
+.footer b { font-size: 18px; font-weight: bold; margin-bottom: 2px;}
+.footer_item {
+	width: 240px;
+}
+.footerwidth {
+	padding-top: 13px;
+	width: 720px;
+}
+.footer_seperator {
+	background-image:url(/images/footer_seperators.png);
+	background-position: right top;
+	background-repeat:no-repeat;
+}
+.btn_orange {
+	background: #f7a600;
+	width: 144px;
+	height: 41px;
+	position: absolute;
+	right: 9px;
+	bottom: 9px;
+	vertical-align: middle;
+	cursor:pointer;
+}
+.btn_orange:hover {
+	/*background-image:url(../img/order_btn_hover.png);*/
+}
+.btn_text {
+	position: absolute;
+	font-weight: bold;
+	font-size: 21px;
+	color: #ffffff;
+	margin-bottom: 9px;
+	bottom: 0;
+	width: 100%;
+	text-align: center;
+}
+.book {
+	margin: 0 auto;
+}
+.page_left, .page_right {
+	width: 50%;
+	height: 100%;
+	position: relative;
+	z-index: 35;
+	top: -379px;
+	background: transparent url('https://dev-fotobuch.clixxie.de/app/img/spacer.gif') no-repeat left top;
+}
+.page_left:hover, .page_right:hover { cursor: pointer; }
+.pager_prev, .pager_next {
+	height: 100%;
+	position: absolute;
+	width: 26px;
+	background-repeat: no-repeat;
+	top: 0;
+	z-index: 35;
+	cursor: pointer;
+}
+.img_left, .img_right {
+	position: absolute;
+}
+.page_left:hover div[class="pager_prev"] {background-image: url(../img/pager_prev.png);}
+.page_right:hover div[class="pager_next"] {background-image: url(../img/pager_next.png);}
+.pager_prev {left: 0; background-position:left center;}
+.pager_next {right: 0; background-position:right center;}
+.sbook_shadow {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.sbook_img {
+	margin-left: 10px;
+	margin-top: 7px;
+	margin-top: -7px;
+}
+.orderbook_info {
+	position: absolute;
+	left: 90px;
+	bottom: 9px;
+	font-size: 12px;
+	line-height: 1.1;
+	color: #333;
+}
+.orderbook_info b { font-size: 14px; font-weight: bold; }
+.stack_left {
+	left: -16px; background-image:url(../img/stack_left.png); background-repeat: no-repeat; background-position: right 34px; width: 16px;
+}
+.stack_right {
+	right: -16px; background-image:url(../img/stack_right.png); background-repeat: no-repeat; background-position: right 34px; width: 16px;
+}
+.stack_lb {
+	left: -16px; bottom: -12px; background-image:url(../img/stack_lb.png); width: 16px; height: 12px;
+}
+.stack_rb {
+	right: -16px; bottom: -12px; background-image:url(../img/stack_rb.png); width: 16px; height: 12px;
+}
+.stack_bottom {
+	bottom: -12px;  background-repeat: repeat-x; height: 12px;
+}
+.stack_bottom_left {
+	left: 0; top: 0; width: 50%; height: 12px; background-image:url(../img/stack_bottom.png); background-repeat: repeat-x; background-position:right top; text-align: right;
+}
+.stack_bottom_right {
+	right: 0; top: 0; width: 50%; height: 12px; background-image:url(../img/stack_bottom.png); background-repeat: repeat-x; background-position:left top; text-align: left;
+}
+.emptyPage {
+	height: 369px;
+	background-image: url(../img/emptyPage.png);
+	background-repeat: repeat;
+}
+.pager_prev_active {background-image: url(../img/pager_prev.png);}
+.pager_next_active {background-image: url(../img/pager_next.png);}
+#SMALL_PREVIEW {
+	width: 70px;
+	height: 70px;
+}
+.gutschein {
+	width: 340px;
+	height: 118px;
+	background: url(../img/voucher_hint.png) no-repeat transparent;
+	position: absolute;
+	left: 30%;
+	top: 55px;
+}
+.gutschein-text {
+	float: right;
+	margin: 7% 7% 0 0;
+	font-size: 24px;
+}
+.gutschein-info {
+	float: right;
+	margin: 15px 15% 0 0;
+	font-size: 12px;
+}
+.orderbook_info_titel {
+	position: relative;
+	margin-bottom: -13px;
+}
+#fotobuch {
+  	width: 1000px;
+  	height: 500px;
+}
+#fotobuch div.page img.bild
+{
+	width: 420px;
+	height: 420px;
+}
+/* .booklet .b-wrap-right {background:#fff;} */
+
