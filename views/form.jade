@@ -5,6 +5,23 @@ block head
   script(src="/libs/parsleyjs/src/i18n/de.js", type="text/javascript")
   script(type='text/javascript').
     $(document).ready(function() {
+      checkPaymentMethod();
+      $('#country_code').on( 'change', function() {
+        checkPaymentMethod();
+      });
+      function checkPaymentMethod()
+      {
+        var newValue = $('#country_code').val();
+        if ( ['DE', 'AT', 'CH'].indexOf( newValue ) > -1 ) 
+        {
+          $('#payment_type_invoice').attr('disabled', false);
+        }
+        else
+        {
+          $('#payment_type_invoice').attr('disabled', true);
+          $('#payment_type_paypal').prop('checked', true);
+        }
+      }
     });
   link(rel='stylesheet', href='/libs/parsleyjs/src/parsley.css', type='text/css')
   link(rel='stylesheet', href='stylesheets/bestellen.css')
