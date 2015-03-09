@@ -1,11 +1,90 @@
 extends layout
 
+block head
+  link(rel='stylesheet', href='stylesheets/bestellen.css')
 block content
-  h1= title
-  div= order.id
-  div
-    a(href='/form').
-      Zur&uuml;ck
-  div
-    a(href=kaufen_link).
-      Kaufen
+  div(class="main")
+    div(class="form overview")
+      div
+        img(src="/images/clixxie_logo.png")
+      div
+        a(href="/album")
+          u Zur&uuml;ck zum Fotobuch
+        hr
+        h1= title
+        div
+          b E-Mail: 
+          br
+          span= order.invoice_address.email
+        div
+          b Liefer- und Rechnungsadresse: 
+          br
+          span= order.invoice_address.name
+          span &nbsp;
+          span= order.invoice_address.surname
+          br
+          span= order.invoice_address.company
+          br
+          span= order.invoice_address.street
+          br
+          span= order.invoice_address.zip_code
+          span &nbsp;
+          span= order.invoice_address.district
+          span &nbsp;
+          span= order.invoice_address.city
+          span &nbsp;
+          span= order.invoice_address.country_name
+        hr
+        div
+          b Ware: 
+          br
+          span= order.order_items[0].quantity
+          span &nbsp;
+          span x Squarebuch 30 Fotos a
+          span &nbsp;
+          span= order.order_items[0].amount_eu
+          span &nbsp;
+          span &euro;
+        div
+          b Versandkosten: 
+          br
+          span= order.order_items[0].shipping_cost_eu
+          span &nbsp;
+          span &euro;
+        div
+          b Zwischensumme: 
+          br
+          - var zs = +order.amount_eu + +order.order_items[0].shipping_cost_eu
+          span= zs
+          span &nbsp;
+          span &euro;
+        div
+          b Rabatt: 
+          br
+          span= order.discount_amount
+          span &nbsp;
+          span &euro;
+        if +order.payment_type_commission > 0
+          div
+            b Zuschlag Rechnung: 
+            br
+            span= order.payment_type_commission
+            span &nbsp;
+            span &euro;
+        div
+          b Endbetrag: 
+          br
+          span= order.total_price
+          span &nbsp;
+          span &euro;
+        hr
+        div
+          b Zahlungsart: 
+          br
+          if +order.payment_type_id === PAYMENT_TYPE_ID_PAYPAL
+            span PayPal
+          else
+            span Auf Rechnung
+        div
+          a(class="kaufen_link", href=kaufen_link).
+            Kaufen

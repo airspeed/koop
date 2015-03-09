@@ -25,7 +25,7 @@ router.post('/', function(req, res, next) {
 		return saveAddress( access_token, req.body );
 	}, errorCallback )
 	.then( function ( address_json ){
-		return saveOrder( access_token, address_json.result.id, album_id, req.body.payment_type_id, req.body.quantity );
+		return saveOrder( access_token, address_json.result.id, album_id, req.body.payment_type_id, +req.body.quantity );
 	}, errorCallback )
 	.then( function( order_json ) {
 		order_id = order_json.result.id;
