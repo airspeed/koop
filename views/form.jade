@@ -6,52 +6,70 @@ block head
     $(document).ready(function() {
     });
   link(rel='stylesheet', href='/libs/parsleyjs/src/parsley.css', type='text/css')
+  link(rel='stylesheet', href='stylesheets/bestellen.css')
 block content
-  h1= title
-  form(data-parsley-validate, method="POST", action="/form")
-    label(for="email").
-      E-Mail
-    input(type="email", name="email" required)
-    label(for="name").
-      Vorname
-    input(type="text", name="name" required)
-    label(for="surname").
-      Name
-    input(type="text", name="surname" required)
-    label(for="company").
-      Firma
-    input(type="text", name="company")
-    label(for="street").
-      Stra&szlig;e u. Hausnummer
-    input(type="text", name="street" required)
-    label(for="zip_code").
-      PLZ
-    input(type="text", name="zip_code" required)
-    label(for="city").
-      Ort
-    input(type="text", name="city" required)
-    label(for="country_code").
-      Land
-    select(id="country_code", name="country_code", required)
-      option(value="DE").
-        Deutschland
-      option(value="AT").
-        &Ouml;sterreich
-      option(value="CH").
-        Schweiz
-    label(for="payment_type_id").
-      Zahlungsart
-    p
-      span.
-        PayPal
-      input(type="radio", name="payment_type_id", id="payment_type_paypal", value="2" required checked)
-      span.
-        Invoice
-      input(type="radio", name="payment_type_id", id="payment_type_invoice", value="1")    
-    label(for="quantity").
-      Menge
-    input(name="quantity", type="number", min="1", max="10" required)
-    label(for="voucher_code").
-      Gutschein-Code
-    input(name="voucher_code", type="text")
-    input(type="submit" value="Abschicken")
+  div(class="main")
+    div(class="form")
+      div
+        img(src="/images/clixxie_logo.png")
+      div
+        a(href="/album") Zur&uuml;ck zum Fotobuch
+        hr
+        h1= title
+      form(data-parsley-validate, method="POST", action="/form")
+            label(for="email") E-Mail
+            input(type="email", name="email" required)
+            label(for="name") Vorname
+            input(type="text", name="name" required)
+            label(for="surname") Name
+            input(type="text", name="surname" required)
+            label(for="company") Firma
+            input(type="text", name="company")
+            label(for="street") Stra&szlig;e u. Hausnummer
+            input(type="text", name="street" required)
+            label(for="zip_code")
+              PLZ
+            input(type="text", name="zip_code" required)
+            label(for="city").
+              Ort
+            input(type="text", name="city" required)
+            label(for="country_code").
+              Land
+            select(id="country_code", name="country_code", required)
+              option(value="DE").
+                Deutschland
+              option(value="AT").
+                &Ouml;sterreich
+              option(value="CH").
+                Schweiz
+              option(value="FR").
+                Frankreich
+              option(value="IT").
+                Italien
+              option(value="NL").
+                Niederlande
+              option(value="BE").
+                Belgien
+              option(value="NO").
+                Norwegen
+              option(value="FI").
+                Finnland
+              option(value="SE").
+                Schweden
+              option(value="DK").
+                D&auml;nemark
+              option(value="GB").
+                Vereinigtes K&ouml;nigreich
+            label(for="payment_type_id").
+              Zahlungsart
+            p
+              span - PayPal
+              input(type="radio", name="payment_type_id", id="payment_type_paypal", value="2" required checked)
+              br
+              span - Invoice
+              input(type="radio", name="payment_type_id", id="payment_type_invoice", value="1")    
+            label(for="quantity") Menge
+            input(name="quantity", type="number", min="1", max="10" required)
+            label(for="voucher_code") Gutschein-Code
+            input(name="voucher_code", type="text")
+            input(type="submit" value="Abschicken")
