@@ -97,7 +97,7 @@ block content
         hr
         div
             label(for="quantity") Menge
-            input(name="quantity", type="number", min="1", max="10" required)
+            input(name="quantity", type="number", min="1", max="10", value="1" required)
         div
             label(for="voucher_code") Gutschein-Code
             input(name="voucher_code", type="text")
@@ -106,8 +106,8 @@ block content
             input(name="agb", type="checkbox" required)
             label(for="agb") Ja, ich stimme den 
               a(href="http://bit.ly/1Hpgwy3" target="_blank") AGB
-              &nbsp; und den 
+              span &nbsp; und den 
               a(href="http://bit.ly/1HphHgN" target="_blank") Datenschutzbestimmungen
-              &nbsp; zu.
+              span &nbsp; zu.
         div
             input(type="submit" value="Zur Bestellübersicht")

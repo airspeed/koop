@@ -9,11 +9,12 @@ router.get( '/', function( req, res, next ) {
 	var access_token = req.query.access_token,
 		order_id = req.query.order_id,
 		kaufen_link = '/done?order_id=' + order_id + '&access_token=' + access_token,
-		order = null;
+		order = null,
+		hostname = req.protocol + '://' + req.headers.host;
 	getOrder( access_token, order_id )
 	.then( function ( order_json ){
 		order = order_json.result;
-		return authorizePayPalPayment( access_token, order_id, kaufen_link, '/form', order.payment_type_id );
+		return authorizePayPalPayment( access_token, order_id, hostname + kaufen_link, hostname + '/form', order.payment_type_id );
 	}, errorCallback )
 	.then( function ( paypal_json ){
 		if ( paypal_json && paypal_json.result && paypal_json.result.paypal_url )
