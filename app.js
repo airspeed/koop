@@ -23,7 +23,8 @@ CLIENT_SECRET = '904efb802e1c5bed30976b50b067875878';
 PDF_PATH = 'public/redbull.pdf';// fotobuch that can be ordered with this app.
 API_VERSION = 'v1.1.5';
 REQUEST_LOCALE = 'de_DE';
-API_HOST = 'fotobuch-api-dev.clixxie.de';
+//API_HOST = 'fotobuch-api-dev.clixxie.de';
+API_HOST = 'fotobuch-api.clixxie.de';
 PRODUCT_CODE = 'CLXB5S2Q';
 PAYMENT_TYPE_ID_PAYPAL = 2;
 
