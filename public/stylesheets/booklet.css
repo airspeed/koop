@@ -17,7 +17,6 @@ body {
 .main {
 	z-index: 1;
 	position: relative;
-	position: static;
 	padding: 20px;
 	margin: 0px auto;
 	width: 1000px;
@@ -204,7 +203,7 @@ div.click-to-flip
 	height: 111px;
 	background: url(/images/click-to-flip.png) no-repeat transparent;
 	position: absolute;
-	right: 100px;
+	right: -100px;
 	top: 200px;
 }
 
