@@ -41,6 +41,7 @@ body {
 	text-align:center;
 	color: #ffffff;
 	position: fixed;
+	position: static;
 	z-index: 0;
 	bottom: 0;
 	padding: 10px;
