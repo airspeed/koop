@@ -37,7 +37,7 @@ block content
           span= order.invoice_address.country_name
         hr
         div
-          b Ware: 
+          b Produkt: 
           br
           span= order.order_items[0].quantity
           span &nbsp;
@@ -53,10 +53,11 @@ block content
           br
           - var zs = +order.amount_eu + +order.order_items[0].shipping_cost_eu
           span= formatCurrency( zs )
-        div
-          b Rabatt: 
-          br
-          span= formatCurrency( order.discount_amount )
+        if +order.discount_amount > 0
+          div
+            b Rabatt: 
+            br
+            span= formatCurrency( order.discount_amount )
         if +order.payment_type_commission > 0
           div
             b Zuschlag Rechnung: 

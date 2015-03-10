@@ -1,7 +1,14 @@
 extends layout
 
+block head
+  link(rel='stylesheet', href='stylesheets/bestellen.css')
 block content
-  h1= title
-  div
-    a(href='/album').
-      Neue Bestellung
+  div(class="main")
+    div(class="form overview")
+      div
+        img(src="/images/clixxie_logo.png")
+      div
+        hr
+        h1= title
+        a(href="/album")
+          u Neue Bestellung
