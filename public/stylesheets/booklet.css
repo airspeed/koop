@@ -10,7 +10,7 @@ body {
 	line-height: 1.33;
 	padding: 0;
 	margin: 0;
-	overflow: hidden;
+	/* overflow: hidden; */
 	background-color: #e0e0e0;
 	color: #181818;
 }
@@ -198,4 +198,13 @@ body {
 	height: 420px;
 }
 /* .booklet .b-wrap-right {background:#fff;} */
+div.click-to-flip
+{
+	width: 97px;
+	height: 111px;
+	background: url(/images/click-to-flip.png) no-repeat transparent;
+	position: absolute;
+	right: 100px;
+	top: 200px;
+}
 
