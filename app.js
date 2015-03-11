@@ -46,6 +46,7 @@ app.use('/album', album);
 app.use('/form', form);
 app.use('/overview', overview);
 app.use('/done', done);
+app.enable('trust proxy');//http://bit.ly/1E4ZMZo
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
